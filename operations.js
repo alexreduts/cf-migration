@@ -39,7 +39,8 @@ exports.backupCloudObjectStorage = function(database_name) {
     if (environment.cloudant_apikey) { // Using IAM auth for Cloudant
       opts = { iamApiKey: environment.cloudant_apikey };
       console.log("Using IAM authentication for Cloudant");
-      var sourceUrl = 'https://' + environment.cloudant_host + '/' + database_name;
+      //var sourceUrl = 'https://' + environment.cloudant_host + '/' + database_name;
+      var sourceUrl = environment.cloudant_url + '/' + database_name;
     } else {  // Using legacy auth with username password in URL
       console.log("Using legacy authentication for Cloudant");
       opts = {};
@@ -74,7 +75,7 @@ exports.backupCloudObjectStorage = function(database_name) {
           apiKeyId: environment.cos_api_key,
           serviceInstanceId: environment.cos_resource_instance_id
         };
-      //}
+      }
 
 			config.endpoint = environment.cos_endpoint_url;
 			config.ibmAuthEndpoint = 'https://iam.ng.bluemix.net/oidc/token';
