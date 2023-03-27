@@ -16,7 +16,7 @@ exports.backupCloudObjectStorage = function(database_name) {
   console.log("Executing Cloudant -- "+ database_name +" -- Backup operation...");
 
   var opts, config;
-
+/*
   if (environment.VCAP_SERVICES["cloudantNoSQLDB"] || environment.VCAP_SERVICES["cloudantNoSQLDB Dedicated"]) {
     console.log("Using Bound Cloudant");
     var vcapServices = environment.VCAP_SERVICES["cloudantNoSQLDB"] || environment.VCAP_SERVICES["cloudantNoSQLDB Dedicated"];
@@ -33,6 +33,7 @@ exports.backupCloudObjectStorage = function(database_name) {
     };
 
   } else {
+  */
     console.log("Using Remote Cloudant");
 
     if (environment.cloudant_apikey) { // Using IAM auth for Cloudant
@@ -45,7 +46,7 @@ exports.backupCloudObjectStorage = function(database_name) {
       var sourceUrl = environment.cloudant_url + '/' + database_name;
     };
 
-  }
+  // }
     
   couchbackup.backup(sourceUrl, fs.createWriteStream(database_name + "-backup.txt"), opts, function(err, obj) {
     if (err) {
@@ -53,7 +54,7 @@ exports.backupCloudObjectStorage = function(database_name) {
     } else {
       var config;
       //if bound - pull in values from Bluemix VCAP credentials
-      if (environment.VCAP_SERVICES["cloud-object-storage"]) {
+      /*if (environment.VCAP_SERVICES["cloud-object-storage"]) {
 
         console.log("Using Bound Object Storage");
 
@@ -67,12 +68,13 @@ exports.backupCloudObjectStorage = function(database_name) {
 
         //if remote - Pull in values from manifest
       } else {
+        */
         console.log("Using Remote Cloud Object Storage");
         config = {
           apiKeyId: environment.cos_api_key,
           serviceInstanceId: environment.cos_resource_instance_id
         };
-      }
+      //}
 
 			config.endpoint = environment.cos_endpoint_url;
 			config.ibmAuthEndpoint = 'https://iam.ng.bluemix.net/oidc/token';

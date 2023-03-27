@@ -12,7 +12,7 @@ var cos;
 exports.deleteBackup = function () {
 
     //credentials
-    if (environment.VCAP_SERVICES["cloud-object-storage"]) {
+    /*if (environment.VCAP_SERVICES["cloud-object-storage"]) {
 
         console.log("Using Bound Object Storage");
 
@@ -26,12 +26,13 @@ exports.deleteBackup = function () {
 
     //if remote - Pull in values from manifest
     } else {
+        */
         console.log("Using Remote Cloud Object Storage");
         config = {
             apiKeyId: environment.cos_api_key,
             serviceInstanceId: environment.cos_resource_instance_id
         };
-    }
+    //}
 
     config.endpoint = environment.cos_endpoint_url;
     config.ibmAuthEndpoint = 'https://iam.ng.bluemix.net/oidc/token';
