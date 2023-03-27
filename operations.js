@@ -75,7 +75,7 @@ exports.backupCloudObjectStorage = function(database_name) {
           apiKeyId: environment.cos_api_key,
           serviceInstanceId: environment.cos_resource_instance_id
         };
-      }
+      //}
 
 			config.endpoint = environment.cos_endpoint_url;
 			config.ibmAuthEndpoint = 'https://iam.ng.bluemix.net/oidc/token';
